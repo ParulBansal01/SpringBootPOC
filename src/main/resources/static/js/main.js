@@ -25,9 +25,11 @@ function fire_ajax_submit() {
     // Get form
     var form = $('#exampleForm')[0];
 
-    var data = new FormData(form);
+    //var fd = new FormData(form).serialize();
 
-    data.append("CustomField", "This is some extra data, testing");
+    var fd = "abc";
+
+    //data.append("CustomField", "This is some extra data, testing");
 
     $("#btnSubmit").prop("disabled", true);
 
@@ -35,27 +37,27 @@ function fire_ajax_submit() {
         type: "POST",
         enctype: 'multipart/form-data',
         url: "/api/test/postrequest",
-        data: data,
-        //http://api.jquery.com/jQuery.ajax/
-        //https://developer.mozilla.org/en-US/docs/Web/
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        data: fd,
+               //http://api.jquery.com/jQuery.ajax/
+               //https://developer.mozilla.org/en-US/docs/Web/API/FormData/Using_FormData_Objects
+               processData: false, //prevent jQuery from automatically transforming the data into a query string
+               contentType: false,
+               cache: false,
+               timeout: 600000,
+          success: function (data) {
+
             $("#result").text(data);
             console.log("SUCCESS : ", data);
             $("#btnSubmit").prop("disabled", false);
 
         },
-        error: function (e) {
+       error: function (e) {
+                  $("#result").text(e.responseText);
+                  console.log("ERROR : ", e);
+                  $("#btnSubmit").prop("disabled", false);
 
-            $("#result").text(e.responseText);
-            console.log("ERROR : ", e);
-            $("#btnSubmit").prop("disabled", false);API/FormData/Using_FormData_Objects
-        processData: false, //prevent jQuery from automatically transforming the data into a query string
-        contentType: false,
-        cache: false,
-        timeout: 600000,
-        success: function (data) {
-
-
-        }
+              }
     });
 
 }
@@ -66,13 +68,17 @@ function load_dropdown() {
     $.ajax({
         type: "GET",
         url: "/api/getAuditorList",
-        data: data,
+        data:data,
         processData: false,
         contentType: false,
         cache: false,
         timeout: 600000,
         success: function (data) {
-            alert(data);
+            var auditors = data.auditors;
+            console.log(auditors);
+                        for (index = 0; index < auditors.length; index++) {
+                            $("#auditor").append("<option value="+index+">" + auditors[index] + "</option>");
+                        }
         },
         error: function (e) {
 
