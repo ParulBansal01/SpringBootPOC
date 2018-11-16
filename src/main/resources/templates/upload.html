@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<h1>Spring Boot REST service example</h1>
+
+<form method="POST" enctype="multipart/form-data" id="exampleForm">
+    <input type="text" name="extraField"/><br/><br/>
+    <input type="submit" value="Submit" id="btnSubmit"/>
+    <select id="auditor">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="mercedes">Mercedes</option>
+        <option value="audi">Audi</option>
+    </select>
+
+</form>
+
+<h1>Post Result</h1>
+<pre>
+    <span id="result"></span>
+</pre>
+
+<script type="text/javascript"
+        src="webjars/jquery/2.2.4/jquery.min.js"></script>
+
+<script type="text/javascript" src="js/main.js"></script>
+
+</body>
+</html>
