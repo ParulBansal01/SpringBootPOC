@@ -2,18 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
-<<<<<<<<Spring Boot Micro service example>>>>>>>
+Spring Boot Micro service example
 
 <form method="POST" enctype="multipart/form-data" id="exampleForm">
-
-    <select id="auditor">
-
-    </select>
-    <br>
-    <b>Auditor Name:</b> <input type="text" name="auditorname"/><br/><br/>
-
+    Managers: <select id="auditors"> </select>
+    <br/><br/>
+    <b>Plan Name:</b> <input type="text" name="auditorname" id="auditorname"/><br/><br/>
     <input type="submit" value="Submit" id="btnSubmit"/>
-
 </form>
 
 Post Result
@@ -24,8 +19,6 @@ Post Result
 
 <script type="text/javascript"
         src="webjars/jquery/2.2.4/jquery.min.js"></script>
-
 <script type="text/javascript" src="js/main.js"></script>
-
 </body>
 </html>

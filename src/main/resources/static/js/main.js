@@ -26,8 +26,9 @@ function fire_ajax_submit() {
     var form = $('#exampleForm')[0];
 
     //var fd = new FormData(form).serialize();
-
-    var fd = "abc";
+    e = document.getElementById ("auditors");
+    var strUser =  e.options [e.selectedIndex].label;
+    var fd =strUser + "," +document.getElementById("auditorname").value;
 
     //data.append("CustomField", "This is some extra data, testing");
 
@@ -77,7 +78,7 @@ function load_dropdown() {
             var auditors = data.auditors;
             console.log(auditors);
                         for (index = 0; index < auditors.length; index++) {
-                            $("#auditor").append("<option value="+index+">" + auditors[index] + "</option>");
+                            $("#auditors").append("<option value="+index+">" + auditors[index] + "</option>");
                         }
         },
         error: function (e) {

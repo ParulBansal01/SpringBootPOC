@@ -11,7 +11,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.*;
-import java.net.URL;
 import java.util.*;
 
 @org.springframework.web.bind.annotation.RestController
@@ -25,15 +24,11 @@ public class RestController {
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE
     )
     public ResponseEntity<?> testPostRequest(@RequestBody MultiValueMap<String, String> data) {
-
         Set set = data.keySet();
         Iterator iterator = set.iterator();
         String s = (String) iterator.next();
 
-        System.out.println(getFileWithUtil("test.txt"));
-
-        addAuditorToFile("test.txt", s);
-
+        addAuditorToFile("plan_details.txt", s);
         return new ResponseEntity("Successfully Invoked -", HttpStatus.OK);
     }
 
@@ -41,7 +36,7 @@ public class RestController {
     public ResponseEntity<?> getAuditorList(RestController restController) {
 
         ClassLoader classLoader = getClass().getClassLoader();
-        String str = classLoader.getResource("test.txt").getFile();
+        String str = classLoader.getResource("managers.txt").getFile();
         AuditorResponse response = new AuditorResponse();
         BufferedReader reader;
         try {
@@ -65,13 +60,13 @@ public class RestController {
         return new ResponseEntity(response, HttpStatus.OK);
     }
 
-    private void addAuditorToFile(String fileName, String auditor) {
+    private void addAuditorToFile(String fileName, String data) {
         ClassLoader classLoader = getClass().getClassLoader();
         String str = classLoader.getResource(fileName).getFile();
         try {
             BufferedWriter out = new BufferedWriter(
                     new FileWriter(str, true));
-            out.write("\n" + auditor);
+            out.write("\n" + data );
             out.close();
         } catch (Exception e) {
             e.printStackTrace();
